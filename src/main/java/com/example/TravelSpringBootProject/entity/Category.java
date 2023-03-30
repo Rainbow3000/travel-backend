@@ -1,0 +1,67 @@
+package com.example.TravelSpringBootProject.entity;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.Length;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+@Table(name = "categorys")
+public class Category extends BaseEntity implements Serializable {
+    @Length(min = 5, max = 256)
+    @NotNull
+    private String categoryName;
+    private String categoryImg;
+    private String categoryDesc;
+    @NotNull
+    private int categoryStatus;
+    public Category(){}
+
+    @OneToMany(mappedBy = "category")
+    private Set<Travel> travel = new HashSet<>();
+
+    public Set<Travel> getTravel() {
+        return travel;
+    }
+
+    public void setTravel(Set<Travel> travel) {
+        this.travel = travel;
+    }
+
+    public int getCategoryStatus() {
+        return categoryStatus;
+    }
+
+    public void setCategoryStatus(int categoryStatus) {
+        this.categoryStatus = categoryStatus;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public String getCategoryImg() {
+        return categoryImg;
+    }
+
+    public void setCategoryImg(String categoryImg) {
+        this.categoryImg = categoryImg;
+    }
+
+    public String getCategoryDesc() {
+        return categoryDesc;
+    }
+
+    public void setCategoryDesc(String categoryDesc) {
+        this.categoryDesc = categoryDesc;
+    }
+}
