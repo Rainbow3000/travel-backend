@@ -51,4 +51,24 @@ public class TravelController {
 
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getSingleTravel(@PathVariable(name = "id") String id){
+        try{
+            System.out.println(id);
+            return null;
+        }catch (NotFoundException ex){
+            return null;
+        }
+    }
+
+//    @GetMapping
+//    public ResponseEntity<?> getAllTravelByCategory(){
+//        try{
+//            return null;
+//        }catch (NotFoundException ex){
+//            return null;
+//        }
+//    }
+
+
 }

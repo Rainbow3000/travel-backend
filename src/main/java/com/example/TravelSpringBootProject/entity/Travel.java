@@ -6,7 +6,11 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import java.io.Serializable;
+import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "travels")
@@ -22,20 +26,19 @@ public class Travel extends BaseEntity implements Serializable {
     @NotNull
     private int travelStatus;
     @NotNull
-    private int travelViewQuantity;
-    @NotNull
-    private int travelOrderQuantity;
-    private String travelDesc;
     private String travelAddress;
+
+    @NotNull
+    private String dateNumber;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
     @JsonIgnore
     private Category category;
-
+    @OneToOne(mappedBy = "travel",cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private TravelDetails travelDetails;
     public Travel() {}
-
-
 
     public String getTravelName() {
         return travelName;
@@ -69,28 +72,12 @@ public class Travel extends BaseEntity implements Serializable {
         this.travelStatus = travelStatus;
     }
 
-    public int getTravelViewQuantity() {
-        return travelViewQuantity;
+    public String getDateNumber() {
+        return dateNumber;
     }
 
-    public void setTravelViewQuantity(int travelViewQuantity) {
-        this.travelViewQuantity = travelViewQuantity;
-    }
-
-    public int getTravelOrderQuantity() {
-        return travelOrderQuantity;
-    }
-
-    public void setTravelOrderQuantity(int travelOrderQuantity) {
-        this.travelOrderQuantity = travelOrderQuantity;
-    }
-
-    public String getTravelDesc() {
-        return travelDesc;
-    }
-
-    public void setTravelDesc(String travelDesc) {
-        this.travelDesc = travelDesc;
+    public void setDateNumber(String dateNumber) {
+        this.dateNumber = dateNumber;
     }
 
     public String getTravelAddress() {
@@ -107,5 +94,13 @@ public class Travel extends BaseEntity implements Serializable {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+
+    public TravelDetails getTravelDetails() {
+        return travelDetails;
+    }
+    public void setTravelDetails(TravelDetails travelDetails) {
+        this.travelDetails = travelDetails;
     }
 }

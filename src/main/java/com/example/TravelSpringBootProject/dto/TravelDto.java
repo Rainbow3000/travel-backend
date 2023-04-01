@@ -22,11 +22,6 @@ public class TravelDto extends BaseDto {
     private double travelPrice;
     @NotNull
     private int travelStatus;
-    @NotNull
-    private int travelViewQuantity;
-    @NotNull
-    private int travelOrderQuantity;
-    private String travelDesc;
     private String travelAddress;
     @NotNull
     private Long categoryId;
@@ -76,29 +71,6 @@ public class TravelDto extends BaseDto {
         this.travelStatus = travelStatus;
     }
 
-    public int getTravelViewQuantity() {
-        return travelViewQuantity;
-    }
-
-    public void setTravelViewQuantity(int travelViewQuantity) {
-        this.travelViewQuantity = travelViewQuantity;
-    }
-
-    public int getTravelOrderQuantity() {
-        return travelOrderQuantity;
-    }
-
-    public void setTravelOrderQuantity(int travelOrderQuantity) {
-        this.travelOrderQuantity = travelOrderQuantity;
-    }
-
-    public String getTravelDesc() {
-        return travelDesc;
-    }
-
-    public void setTravelDesc(String travelDesc) {
-        this.travelDesc = travelDesc;
-    }
 
     public String getTravelAddress() {
         return travelAddress;

@@ -48,8 +48,10 @@ public class WebSecurityConfig {
             httpSecurity.authorizeHttpRequests(request->{
                 request.requestMatchers(
                                 new AntPathRequestMatcher("/api/v1/travel/**"),
+                                new AntPathRequestMatcher("/api/v1/category/**"),
                                 new AntPathRequestMatcher("/api/v1/auth/**"),
-                                new AntPathRequestMatcher("/api/v1/role/**")
+                                new AntPathRequestMatcher("/api/v1/role/**"),
+                                new AntPathRequestMatcher("/test/**")
                         ).permitAll()
                         .anyRequest().authenticated();
             });

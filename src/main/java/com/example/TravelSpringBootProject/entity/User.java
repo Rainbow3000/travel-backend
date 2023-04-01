@@ -28,6 +28,14 @@ public class User extends BaseEntity implements UserDetails {
     @NotNull
     private int status;
 
+    @NotNull
+    @OneToMany(mappedBy = "user")
+    private Set<Order> orders = new HashSet<>();
+    @NotNull
+    @OneToOne(mappedBy = "user")
+    @PrimaryKeyJoinColumn
+    private UserInfoDetails userInfoDetails;
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_role",joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id"))
@@ -106,6 +114,19 @@ public class User extends BaseEntity implements UserDetails {
         this.roles.add(role);
     }
 
+    public UserInfoDetails getUserInfoDetails() {
+        return userInfoDetails;
+    }
 
+    public void setUserInfoDetails(UserInfoDetails userInfoDetails) {
+        this.userInfoDetails = userInfoDetails;
+    }
 
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
+    }
 }
