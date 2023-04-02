@@ -11,23 +11,14 @@ import java.util.Set;
 
 @Component
 public class CategoryDto extends BaseDto {
-    @Length(min = 5, max = 256)
+    @Length(min = 2, max = 30,message = "Độ dài danh mục phải lớn hơn >= 2 kí tự")
     @NotNull
     private String categoryName;
-    private String categoryImage;
-    private String categoryDesc;
+    @NotNull(message = "Ảnh phải có giá trị")
+    private String categoryImg;
+    @NotNull(message = "Trạng thái phải có giá trị")
     private int categoryStatus;
     public CategoryDto(){}
-
-    private Set<Travel> travel = new HashSet<>();
-
-    public Set<Travel> getTravel() {
-        return travel;
-    }
-
-    public void setTravel(Set<Travel> travel) {
-        this.travel = travel;
-    }
 
     public int getCategoryStatus() {
         return categoryStatus;
@@ -45,19 +36,11 @@ public class CategoryDto extends BaseDto {
         this.categoryName = categoryName;
     }
 
-    public String getCategoryImage() {
-        return categoryImage;
+    public String getCategoryImg() {
+        return categoryImg;
     }
 
-    public void setCategoryImage(String categoryImage) {
-        this.categoryImage = categoryImage;
-    }
-
-    public String getCategoryDesc() {
-        return categoryDesc;
-    }
-
-    public void setCategoryDesc(String categoryDesc) {
-        this.categoryDesc = categoryDesc;
+    public void setCategoryImg(String categoryImg) {
+        this.categoryImg = categoryImg;
     }
 }

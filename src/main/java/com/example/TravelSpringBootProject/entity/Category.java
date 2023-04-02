@@ -12,13 +12,13 @@ import java.util.Set;
 
 @Entity
 @Table(name = "categorys")
-public class Category extends BaseEntity implements Serializable {
-    @Length(min = 5, max = 256)
+public class Category extends BaseEntity{
+    @Length(min = 2, max = 30,message = "Độ dài danh mục phải lớn hơn >= 2 kí tự")
     @NotNull
     private String categoryName;
+    @NotNull(message = "Ảnh phải có giá trị")
     private String categoryImg;
-    private String categoryDesc;
-    @NotNull
+    @NotNull(message = "Trạng thái phải có giá trị")
     private int categoryStatus;
     public Category(){}
 
@@ -57,11 +57,4 @@ public class Category extends BaseEntity implements Serializable {
         this.categoryImg = categoryImg;
     }
 
-    public String getCategoryDesc() {
-        return categoryDesc;
-    }
-
-    public void setCategoryDesc(String categoryDesc) {
-        this.categoryDesc = categoryDesc;
-    }
 }

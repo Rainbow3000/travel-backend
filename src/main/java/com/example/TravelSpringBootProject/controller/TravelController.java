@@ -3,6 +3,7 @@ import com.example.TravelSpringBootProject.constants.Message;
 import com.example.TravelSpringBootProject.dto.TravelDto;
 import com.example.TravelSpringBootProject.entity.Category;
 import com.example.TravelSpringBootProject.entity.Travel;
+import com.example.TravelSpringBootProject.entity.TravelDetails;
 import com.example.TravelSpringBootProject.exception.NotFoundException;
 import com.example.TravelSpringBootProject.response.DataResponse;
 import com.example.TravelSpringBootProject.service.ICategoryService;
@@ -20,6 +21,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/travel")
+@CrossOrigin
 public class TravelController {
     @Autowired
     private ITravelService iTravelService;
@@ -41,7 +43,11 @@ public class TravelController {
     public ResponseEntity<?> create(@RequestBody @Valid TravelDto travelDto){
             try{
                 Travel travelRequest = modelMapper.map(travelDto,Travel.class);
-                Travel travel = iTravelService.save(travelRequest,travelDto.getCategoryId());
+                TravelDetails travelDetails = new TravelDetails();
+                travelDetails.setTravelDescription(travelDto.getTravelDescription());
+                travelDetails.setTravelDateNumber(travelDto.getTravelDateNumber());
+                travelDetails.setTravelAddress(travelDto.getTravelAddress());
+                Travel travel = iTravelService.save(travelRequest,travelDetails,travelDto.getCategoryId());
                 TravelDto travelResponse = modelMapper.map(travel,TravelDto.class);
                 return ResponseEntity.ok().body(new DataResponse(HttpStatus.CREATED.value(),Message.success, travelResponse,null));
             }catch (NotFoundException ex){

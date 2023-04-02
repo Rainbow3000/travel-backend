@@ -22,15 +22,12 @@ public class Travel extends BaseEntity implements Serializable {
     private String travelImg;
 
     @NotNull
-    private double travelPrice;
+    private double travelPriceNew;
+
+    @NotNull
+    private double travelPriceOld;
     @NotNull
     private int travelStatus;
-    @NotNull
-    private String travelAddress;
-
-    @NotNull
-    private String dateNumber;
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
     @JsonIgnore
@@ -56,12 +53,20 @@ public class Travel extends BaseEntity implements Serializable {
         this.travelImg = travelImg;
     }
 
-    public double getTravelPrice() {
-        return travelPrice;
+    public double getTravelPriceNew() {
+        return travelPriceNew;
     }
 
-    public void setTravelPrice(double travelPrice) {
-        this.travelPrice = travelPrice;
+    public void setTravelPriceNew(double travelPriceNew) {
+        this.travelPriceNew = travelPriceNew;
+    }
+
+    public double getTravelPriceOld() {
+        return travelPriceOld;
+    }
+
+    public void setTravelPriceOld(double travelPriceOld) {
+        this.travelPriceOld = travelPriceOld;
     }
 
     public int getTravelStatus() {
@@ -70,22 +75,6 @@ public class Travel extends BaseEntity implements Serializable {
 
     public void setTravelStatus(int travelStatus) {
         this.travelStatus = travelStatus;
-    }
-
-    public String getDateNumber() {
-        return dateNumber;
-    }
-
-    public void setDateNumber(String dateNumber) {
-        this.dateNumber = dateNumber;
-    }
-
-    public String getTravelAddress() {
-        return travelAddress;
-    }
-
-    public void setTravelAddress(String travelAddress) {
-        this.travelAddress = travelAddress;
     }
 
     public Category getCategory() {

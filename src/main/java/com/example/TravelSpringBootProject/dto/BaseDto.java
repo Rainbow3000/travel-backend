@@ -2,19 +2,20 @@ package com.example.TravelSpringBootProject.dto;
 
 import org.springframework.stereotype.Component;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Date;
 
 @Component
 public abstract class BaseDto {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Date createdDate;
     private Date updatedDate;
     private String modifyBy;
     private String createdBy;
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getId() {
         return id;
@@ -27,6 +28,10 @@ public abstract class BaseDto {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Date getUpdatedDate() {

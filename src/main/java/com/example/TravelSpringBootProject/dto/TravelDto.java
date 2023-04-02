@@ -4,10 +4,7 @@ import com.example.TravelSpringBootProject.entity.Category;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Component
@@ -15,17 +12,22 @@ public class TravelDto extends BaseDto {
     @Length(min = 5, max = 256)
     @NotNull
     private String travelName;
-
     private String travelImg;
+    @NotNull
+    private double travelPriceNew;
 
     @NotNull
-    private double travelPrice;
+    private String travelDescription;
+    @NotNull
+    private double travelPriceOld;
     @NotNull
     private int travelStatus;
     private String travelAddress;
     @NotNull
+    private String travelDateNumber;
+
+    @NotNull
     private Long categoryId;
-    private Category category;
 
     public TravelDto() {}
 
@@ -55,12 +57,20 @@ public class TravelDto extends BaseDto {
         this.travelImg = travelImg;
     }
 
-    public double getTravelPrice() {
-        return travelPrice;
+    public double getTravelPriceOld() {
+        return travelPriceOld;
     }
 
-    public void setTravelPrice(double travelPrice) {
-        this.travelPrice = travelPrice;
+    public void setTravelPriceOld(double travelPriceOld) {
+        this.travelPriceOld = travelPriceOld;
+    }
+
+    public String getTravelDateNumber() {
+        return travelDateNumber;
+    }
+
+    public void setTravelDateNumber(String travelDateNumber) {
+        this.travelDateNumber = travelDateNumber;
     }
 
     public int getTravelStatus() {
@@ -80,11 +90,19 @@ public class TravelDto extends BaseDto {
         this.travelAddress = travelAddress;
     }
 
-    public Category getCategory() {
-        return category;
+    public double getTravelPriceNew() {
+        return travelPriceNew;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setTravelPriceNew(double travelPriceNew) {
+        this.travelPriceNew = travelPriceNew;
+    }
+
+    public String getTravelDescription() {
+        return travelDescription;
+    }
+
+    public void setTravelDescription(String travelDescription) {
+        this.travelDescription = travelDescription;
     }
 }

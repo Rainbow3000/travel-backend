@@ -47,13 +47,13 @@ public class WebSecurityConfig {
             httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
             httpSecurity.authorizeHttpRequests(request->{
                 request.requestMatchers(
-                                new AntPathRequestMatcher("/api/v1/travel/**"),
-                                new AntPathRequestMatcher("/api/v1/category/**"),
-                                new AntPathRequestMatcher("/api/v1/auth/**"),
-                                new AntPathRequestMatcher("/api/v1/role/**"),
-                                new AntPathRequestMatcher("/test/**")
+//                                new AntPathRequestMatcher("/api/v1/travel/**"),
+//                                new AntPathRequestMatcher("/api/v1/category/**"),
+//                                new AntPathRequestMatcher("/api/v1/auth/**"),
+//                                new AntPathRequestMatcher("/api/v1/role/**"),
+//                                new AntPathRequestMatcher("/test/**")
                         ).permitAll()
-                        .anyRequest().authenticated();
+                        .anyRequest().permitAll();
             });
 
             httpSecurity.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
@@ -74,16 +74,6 @@ public class WebSecurityConfig {
         };
     }
 
-
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST","DELETE","UPDATE"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
 
     @Bean
     public PasswordEncoder passwordEncoder(){
