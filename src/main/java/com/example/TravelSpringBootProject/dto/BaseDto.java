@@ -1,5 +1,6 @@
 package com.example.TravelSpringBootProject.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.GeneratedValue;
@@ -12,9 +13,13 @@ public abstract class BaseDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @JsonIgnore
     private Date createdDate;
+    @JsonIgnore
     private Date updatedDate;
+    @JsonIgnore
     private String modifyBy;
+    @JsonIgnore
     private String createdBy;
 
     public Long getId() {

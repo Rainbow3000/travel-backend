@@ -19,8 +19,6 @@ public class DatabaseInit implements CommandLineRunner {
     private RoleRepository roleRepository;
     @Override
     public void run(String... args) throws Exception {
-//        Role roleAdmin = new Role();
-//        roleAdmin.setRoleName("ROLE_ADMIN");
-//        roleRepository.save(roleAdmin);
+
     }
 }

@@ -35,6 +35,7 @@ public class Travel extends BaseEntity implements Serializable {
     @OneToOne(mappedBy = "travel",cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private TravelDetails travelDetails;
+
     public Travel() {}
 
     public String getTravelName() {
@@ -92,4 +93,6 @@ public class Travel extends BaseEntity implements Serializable {
     public void setTravelDetails(TravelDetails travelDetails) {
         this.travelDetails = travelDetails;
     }
+
+
 }

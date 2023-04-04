@@ -12,7 +12,6 @@ public class Order extends BaseEntity{
     @OneToOne(mappedBy = "order")
     @PrimaryKeyJoinColumn
     private OrderDetails orderDetails;
-    private String note;
 
     public Order() {}
 
@@ -22,14 +21,6 @@ public class Order extends BaseEntity{
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
     }
 
     public OrderDetails getOrderDetails() {

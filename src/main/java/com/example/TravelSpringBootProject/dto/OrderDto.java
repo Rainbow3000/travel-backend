@@ -1,37 +1,46 @@
-package com.example.TravelSpringBootProject.entity;
+package com.example.TravelSpringBootProject.dto;
 
+import com.example.TravelSpringBootProject.entity.Order;
+import com.example.TravelSpringBootProject.entity.Travel;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-@Entity
-public class OrderDetails extends BaseEntity {
+public class OrderDto extends BaseDto{
 
-    @Id
-    @Column(name = "order_id")
-    private Long id;
+    @NotNull
+    private Long userId;
 
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "order_id")
-    private Order order;
+    @NotNull
+    private Long orderId;
 
-    @ManyToOne
-    @JoinColumn(name = "travel_id")
-    private Travel travel;
+    @NotNull
+    private Long travelId;
+
+    @NotNull
+    @NotEmpty
     private String customerName;
+
+    @NotNull
     private String customerEmail;
+
+    @NotNull
+    @NotEmpty
     private String customerAddress;
+
+    @NotNull
+    @NotEmpty
     private String customerPhone;
+
+    @NotNull
     private double totalPrice;
     private String peopelQuantity;
+
+    @NotNull
+    @NotEmpty
     private String status;
-
     private String customerNote;
-
-    public OrderDetails() {}
-
-
 
     public String getPeopelQuantity() {
         return peopelQuantity;
@@ -49,29 +58,6 @@ public class OrderDetails extends BaseEntity {
         this.status = status;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-
-    public Travel getTravel() {
-        return travel;
-    }
-
-    public void setTravel(Travel travel) {
-        this.travel = travel;
-    }
 
     public String getCustomerName() {
         return customerName;

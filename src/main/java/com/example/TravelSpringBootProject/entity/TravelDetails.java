@@ -28,9 +28,18 @@ public class TravelDetails{
     @NotNull
     private String travelDateNumber;
 
+
+    @OneToMany(mappedBy = "travelDetails")
+    private Set<TravelPriceTable> travelPriceTables = new HashSet<>();
+
+    @OneToMany(mappedBy = "travelDetails")
+    private Set<TravelFeatured> travelFeatureds = new HashSet<>();
+
+    @OneToMany(mappedBy = "travelDetails")
+    private Set<TravelSchedule> travelSchedules = new HashSet<>();
+
     @OneToMany(mappedBy = "travelDetails")
     private Set<Comment> comments = new HashSet<>();
-
     public TravelDetails() {};
 
     public Long getId() {
@@ -57,13 +66,6 @@ public class TravelDetails{
         this.travelDescription = travelDescription;
     }
 
-    public Set<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(Set<Comment> comments) {
-        this.comments = comments;
-    }
 
     public String getTravelAddress() {
         return travelAddress;
@@ -81,4 +83,35 @@ public class TravelDetails{
         this.travelDateNumber = travelDateNumber;
     }
 
+    public Set<TravelFeatured> getTravelFeatureds() {
+        return travelFeatureds;
+    }
+
+    public void setTravelFeatureds(Set<TravelFeatured> travelFeatureds) {
+        this.travelFeatureds = travelFeatureds;
+    }
+
+    public Set<TravelSchedule> getTravelSchedules() {
+        return travelSchedules;
+    }
+
+    public void setTravelSchedules(Set<TravelSchedule> travelSchedules) {
+        this.travelSchedules = travelSchedules;
+    }
+
+    public Set<TravelPriceTable> getTravelPriceTables() {
+        return travelPriceTables;
+    }
+
+    public void setTravelPriceTables(Set<TravelPriceTable> travelPriceTables) {
+        this.travelPriceTables = travelPriceTables;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
+    }
 }

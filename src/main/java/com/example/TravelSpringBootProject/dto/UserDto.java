@@ -29,6 +29,7 @@ public class UserDto extends BaseDto {
 
     private String accessToken;
     private String refreshToken;
+
     public UserDto(){};
 
     public Set<Role> getRoles() {

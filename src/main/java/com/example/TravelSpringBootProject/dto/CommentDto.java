@@ -1,40 +1,21 @@
-package com.example.TravelSpringBootProject.entity;
-
+package com.example.TravelSpringBootProject.dto;
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.*;
+
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
-@Entity
-@Table(name = "comments")
-public class Comment extends BaseEntity{
+public class CommentDto extends BaseDto {
     @NotNull
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    private Long userId;
+    @NotNull
+    private Long travelId;
+    private Date commentDate;
 
     private String userCommentName;
-
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "travel_id")
-    private TravelDetails travelDetails;
-
-    private Date commentDate;
     @NotNull
     @Length(max = 100)
     private String content;
-
-    public Comment() {}
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public String getContent() {
         return content;
@@ -44,12 +25,20 @@ public class Comment extends BaseEntity{
         this.content = content;
     }
 
-    public TravelDetails getTravelDetails() {
-        return travelDetails;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setTravelDetails(TravelDetails travelDetails) {
-        this.travelDetails = travelDetails;
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Long getTravelId() {
+        return travelId;
+    }
+
+    public void setTravelId(Long travelId) {
+        this.travelId = travelId;
     }
 
     public Date getCommentDate() {

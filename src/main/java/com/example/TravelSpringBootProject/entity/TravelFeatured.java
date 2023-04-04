@@ -1,5 +1,7 @@
 package com.example.TravelSpringBootProject.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -11,6 +13,7 @@ public class TravelFeatured extends BaseEntity {
     private String featuredName;
     @ManyToOne
     @JoinColumn(name = "featured_travel_details_id")
+    @JsonIgnore
     private TravelDetails travelDetails;
     public TravelFeatured(){};
     public String getFeaturedName() {

@@ -1,9 +1,10 @@
 package com.example.TravelSpringBootProject.repository;
 
-import com.example.TravelSpringBootProject.entity.TravelSchedule;
+
+import com.example.TravelSpringBootProject.entity.ScheduleContent;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TravelScheduleRepository extends JpaRepository<TravelSchedule,Long> {
+public interface ScheduleContentRepository extends JpaRepository<ScheduleContent,Long> {
 }
