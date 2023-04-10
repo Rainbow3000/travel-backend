@@ -6,21 +6,18 @@ import com.example.TravelSpringBootProject.dto.ScheduleContentDto;
 import com.example.TravelSpringBootProject.entity.ScheduleContent;
 import com.example.TravelSpringBootProject.exception.NotFoundException;
 import com.example.TravelSpringBootProject.response.DataResponse;
-import com.example.TravelSpringBootProject.service.IScheduleContentService;
+import com.example.TravelSpringBootProject.service.interfaces.IScheduleContentService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.prefs.BackingStoreException;
 
 @RestController
 @RequestMapping("/api/v1/travel/schedule/content")
+@CrossOrigin
 public class ScheduleContentController{
     @Autowired
     private ModelMapper modelMapper;

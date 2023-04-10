@@ -5,20 +5,18 @@ import com.example.TravelSpringBootProject.dto.RoleDto;
 import com.example.TravelSpringBootProject.entity.Role;
 import com.example.TravelSpringBootProject.exception.DuplicateException;
 import com.example.TravelSpringBootProject.response.DataResponse;
-import com.example.TravelSpringBootProject.service.IRoleService;
+import com.example.TravelSpringBootProject.service.interfaces.IRoleService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/role")
+@CrossOrigin
 public class RoleController {
     @Autowired
     private IRoleService iRoleService;

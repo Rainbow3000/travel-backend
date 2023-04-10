@@ -12,9 +12,9 @@ public class TravelFeatured extends BaseEntity {
     @JoinColumn(columnDefinition = "TEXT")
     private String featuredName;
     @ManyToOne
-    @JoinColumn(name = "featured_travel_details_id")
+    @JoinColumn(name = "featured_travel_id")
     @JsonIgnore
-    private TravelDetails travelDetails;
+    private Travel travel;
     public TravelFeatured(){};
     public String getFeaturedName() {
         return featuredName;
@@ -24,13 +24,11 @@ public class TravelFeatured extends BaseEntity {
         this.featuredName = featuredName;
     }
 
-    public TravelDetails getTravelDetails() {
-        return travelDetails;
+    public Travel getTravel() {
+        return travel;
     }
 
-    public void setTravelDetails(TravelDetails travelDetails) {
-        this.travelDetails = travelDetails;
+    public void setTravel(Travel travel) {
+        this.travel = travel;
     }
-
-
 }

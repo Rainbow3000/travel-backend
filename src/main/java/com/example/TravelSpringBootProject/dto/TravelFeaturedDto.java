@@ -1,9 +1,5 @@
 package com.example.TravelSpringBootProject.dto;
 
-import com.example.TravelSpringBootProject.entity.TravelDetails;
-
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -12,7 +8,7 @@ public class TravelFeaturedDto extends BaseDto {
     private String featuredName;
     @NotNull
     @NotEmpty
-    private String  travelDetailsId;
+    private Long  travelId;
     public TravelFeaturedDto(){};
     public String getFeaturedName() {
         return featuredName;
@@ -22,11 +18,11 @@ public class TravelFeaturedDto extends BaseDto {
         this.featuredName = featuredName;
     }
 
-    public String getTravelDetailsId() {
-        return travelDetailsId;
+    public Long getTravelId() {
+        return travelId;
     }
 
-    public void setTravelDetailsId(String travelDetailsId) {
-        this.travelDetailsId = travelDetailsId;
+    public void setTravelId(Long travelId) {
+        this.travelId = travelId;
     }
 }

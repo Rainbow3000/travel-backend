@@ -9,16 +9,18 @@ import javax.persistence.ManyToOne;
 import java.sql.Date;
 
 @Entity
+
 public class TravelPriceTable extends BaseEntity{
     private Date dateStart;
+
     private String typeTransport;
 
     private String place;
     private double price;
     @ManyToOne
-    @JoinColumn(name = "price_table_travel_details_id")
+    @JoinColumn(name = "price_table_travel_id")
     @JsonIgnore
-    private TravelDetails travelDetails;
+    private Travel travel;
 
     public TravelPriceTable() {
 
@@ -48,19 +50,19 @@ public class TravelPriceTable extends BaseEntity{
         this.price = price;
     }
 
-    public TravelDetails getTravelDetails() {
-        return travelDetails;
-    }
-
-    public void setTravelDetails(TravelDetails travelDetails) {
-        this.travelDetails = travelDetails;
-    }
-
     public String getPlace() {
         return place;
     }
 
     public void setPlace(String place) {
         this.place = place;
+    }
+
+    public Travel getTravel() {
+        return travel;
+    }
+
+    public void setTravel(Travel travel) {
+        this.travel = travel;
     }
 }

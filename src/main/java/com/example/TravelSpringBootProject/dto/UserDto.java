@@ -20,10 +20,6 @@ public class UserDto extends BaseDto {
     @Length(min = 8,max = 64)
     @NotNull
     private String password;
-
-    @NotNull
-    private int status;
-
     @NotNull
     private Set<Role> roles = new HashSet<>();
 
@@ -72,12 +68,4 @@ public class UserDto extends BaseDto {
         this.password = password;
     }
 
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
 }

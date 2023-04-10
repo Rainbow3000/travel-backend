@@ -1,12 +1,7 @@
 package com.example.TravelSpringBootProject.dto;
 
 import com.example.TravelSpringBootProject.entity.ScheduleDate;
-import com.example.TravelSpringBootProject.entity.TravelDetails;
 
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,7 +13,7 @@ public class TravelScheduleDto extends BaseDto {
 
     private Set<ScheduleDate> scheduleDates = new HashSet<>();
     @NotNull
-    private Long travelDetailsId;
+    private Long travelId;
 
     public String getDateName() {
         return dateName;
@@ -26,14 +21,6 @@ public class TravelScheduleDto extends BaseDto {
 
     public void setDateName(String dateName) {
         this.dateName = dateName;
-    }
-
-    public Long getTravelDetailsId() {
-        return travelDetailsId;
-    }
-
-    public void setTravelDetailsId(Long travelDetailsId) {
-        this.travelDetailsId = travelDetailsId;
     }
 
     public Set<ScheduleDate> getScheduleDates() {
@@ -44,5 +31,11 @@ public class TravelScheduleDto extends BaseDto {
         this.scheduleDates = scheduleDates;
     }
 
+    public Long getTravelId() {
+        return travelId;
+    }
 
+    public void setTravelId(Long travelId) {
+        this.travelId = travelId;
+    }
 }

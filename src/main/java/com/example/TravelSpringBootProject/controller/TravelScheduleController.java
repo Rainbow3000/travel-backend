@@ -7,7 +7,7 @@ import com.example.TravelSpringBootProject.dto.TravelScheduleDto;
 import com.example.TravelSpringBootProject.entity.TravelSchedule;
 import com.example.TravelSpringBootProject.exception.NotFoundException;
 import com.example.TravelSpringBootProject.response.DataResponse;
-import com.example.TravelSpringBootProject.service.ITravelScheduleService;
+import com.example.TravelSpringBootProject.service.interfaces.ITravelScheduleService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,7 +31,7 @@ public class TravelScheduleController {
         try{
             TravelSchedule travelScheduleRequest = modelMapper.map(travelScheduleDto,TravelSchedule.class);
 
-            TravelSchedule travelSchedule = iTravelScheduleService.save(travelScheduleRequest,travelScheduleDto.getTravelDetailsId());
+            TravelSchedule travelSchedule = iTravelScheduleService.save(travelScheduleRequest,travelScheduleDto.getTravelId());
 
             TravelFeaturedDto travelScheduleResponse = modelMapper.map(travelSchedule,TravelFeaturedDto.class);
             return ResponseEntity.ok().body(new DataResponse(HttpStatus.CREATED.value(), Message.success,travelScheduleResponse, null));
@@ -54,4 +54,21 @@ public class TravelScheduleController {
 
     }
 
+
+    @GetMapping("/travelId/{id}")
+    public ResponseEntity<?> findAllByTravelId(@PathVariable Long id){
+        try {
+            List<TravelScheduleDto> travelScheduleResponse = new ArrayList<>();
+            iTravelScheduleService.findAllByTravelId(id).stream().forEach(item->{
+                TravelScheduleDto travelScheduleDto = modelMapper.map(item,TravelScheduleDto.class);
+                travelScheduleDto.setScheduleDates(item.getScheduleDate());
+                travelScheduleResponse.add(travelScheduleDto);
+            });
+            return ResponseEntity.ok().body(new DataResponse(HttpStatus.CREATED.value(), Message.success,travelScheduleResponse, null));
+        }catch (NotFoundException ex){
+            return ResponseEntity.ok().body(new DataResponse(HttpStatus.NOT_FOUND.value(), Message.failure,null, ex.getMessage()));
+        }
+
+
+    }
 }

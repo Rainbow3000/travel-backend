@@ -15,7 +15,6 @@ public class TravelDto extends BaseDto {
     private String travelImg;
     @NotNull
     private double travelPriceNew;
-
     @NotNull
     private String travelDescription;
     @NotNull
@@ -31,8 +30,6 @@ public class TravelDto extends BaseDto {
 
     public TravelDto() {}
 
-
-    @NotNull
     public Long getCategoryId() {
         return categoryId;
     }
@@ -105,4 +102,6 @@ public class TravelDto extends BaseDto {
     public void setTravelDescription(String travelDescription) {
         this.travelDescription = travelDescription;
     }
+
+
 }

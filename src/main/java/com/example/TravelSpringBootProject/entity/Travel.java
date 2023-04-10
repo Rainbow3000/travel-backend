@@ -15,26 +15,43 @@ import java.util.Set;
 @Entity
 @Table(name = "travels")
 public class Travel extends BaseEntity implements Serializable {
+    @NotNull
+    @Column(columnDefinition = "TEXT")
+    private String travelDescription ;
+    @NotNull
+    private String travelAddress;
+    @NotNull
+    private String travelDateNumber;
+    @JsonIgnore
+    @OneToMany(mappedBy = "travel")
+    private Set<TravelPriceTable> travelPriceTables = new HashSet<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "travel")
+    private Set<TravelFeatured> travelFeatureds = new HashSet<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "travel")
+    private Set<TravelSchedule> travelSchedules = new HashSet<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "travel")
+    private Set<Comment> comments = new HashSet<>();
+
     @Length(min = 5, max = 256)
     @NotNull
     private String travelName;
-
     private String travelImg;
-
     @NotNull
     private double travelPriceNew;
-
     @NotNull
     private double travelPriceOld;
     @NotNull
     private int travelStatus;
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
-    @JsonIgnore
     private Category category;
-    @OneToOne(mappedBy = "travel",cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    private TravelDetails travelDetails;
 
     public Travel() {}
 
@@ -87,11 +104,62 @@ public class Travel extends BaseEntity implements Serializable {
     }
 
 
-    public TravelDetails getTravelDetails() {
-        return travelDetails;
+
+    public String getTravelDescription() {
+        return travelDescription;
     }
-    public void setTravelDetails(TravelDetails travelDetails) {
-        this.travelDetails = travelDetails;
+
+    public void setTravelDescription(String travelDescription) {
+        this.travelDescription = travelDescription;
+    }
+
+
+    public String getTravelAddress() {
+        return travelAddress;
+    }
+
+    public void setTravelAddress(String travelAddress) {
+        this.travelAddress = travelAddress;
+    }
+
+    public String getTravelDateNumber() {
+        return travelDateNumber;
+    }
+
+    public void setTravelDateNumber(String travelDateNumber) {
+        this.travelDateNumber = travelDateNumber;
+    }
+
+    public Set<TravelFeatured> getTravelFeatureds() {
+        return travelFeatureds;
+    }
+
+    public void setTravelFeatureds(Set<TravelFeatured> travelFeatureds) {
+        this.travelFeatureds = travelFeatureds;
+    }
+
+    public Set<TravelSchedule> getTravelSchedules() {
+        return travelSchedules;
+    }
+
+    public void setTravelSchedules(Set<TravelSchedule> travelSchedules) {
+        this.travelSchedules = travelSchedules;
+    }
+
+    public Set<TravelPriceTable> getTravelPriceTables() {
+        return travelPriceTables;
+    }
+
+    public void setTravelPriceTables(Set<TravelPriceTable> travelPriceTables) {
+        this.travelPriceTables = travelPriceTables;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 
 

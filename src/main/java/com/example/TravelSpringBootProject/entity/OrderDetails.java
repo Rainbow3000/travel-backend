@@ -1,6 +1,8 @@
 package com.example.TravelSpringBootProject.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -18,6 +20,7 @@ public class OrderDetails extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "travel_id")
+    @JsonIgnore
     private Travel travel;
     private String customerName;
     private String customerEmail;

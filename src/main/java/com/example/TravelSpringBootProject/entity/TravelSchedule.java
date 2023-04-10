@@ -15,8 +15,8 @@ public class TravelSchedule extends BaseEntity {
     private String dateName;
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name= "schedule_travel_details_id")
-    private TravelDetails travelDetails;
+    @JoinColumn(name= "schedule_travel_id")
+    private Travel travel;
 
     @OneToMany(mappedBy = "travelSchedule")
     private Set<ScheduleDate> scheduleDate = new HashSet<>();
@@ -29,19 +29,19 @@ public class TravelSchedule extends BaseEntity {
         this.dateName = dateName;
     }
 
-    public TravelDetails getTravelDetails() {
-        return travelDetails;
-    }
-
-    public void setTravelDetails(TravelDetails travelDetails) {
-        this.travelDetails = travelDetails;
-    }
-
     public Set<ScheduleDate> getScheduleDate() {
         return scheduleDate;
     }
 
     public void setScheduleDate(Set<ScheduleDate> scheduleDate) {
         this.scheduleDate = scheduleDate;
+    }
+
+    public Travel getTravel() {
+        return travel;
+    }
+
+    public void setTravel(Travel travel) {
+        this.travel = travel;
     }
 }

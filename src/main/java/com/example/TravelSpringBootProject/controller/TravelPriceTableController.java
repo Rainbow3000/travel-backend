@@ -4,8 +4,9 @@ import com.example.TravelSpringBootProject.constants.Message;
 import com.example.TravelSpringBootProject.dto.TravelPriceTableDto;
 import com.example.TravelSpringBootProject.entity.TravelPriceTable;
 import com.example.TravelSpringBootProject.exception.NotFoundException;
+import com.example.TravelSpringBootProject.repository.TravelPriceTableRepository;
 import com.example.TravelSpringBootProject.response.DataResponse;
-import com.example.TravelSpringBootProject.service.ITravelPriceTableService;
+import com.example.TravelSpringBootProject.service.interfaces.ITravelPriceTableService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,9 @@ public class TravelPriceTableController {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    private TravelPriceTableRepository travelPriceTableRepository;
+
     @PostMapping
     public ResponseEntity<?> save(@RequestBody @Valid TravelPriceTableDto travelPriceTableDto){
         try{
@@ -35,5 +39,10 @@ public class TravelPriceTableController {
         }catch (NotFoundException ex){
             return ResponseEntity.ok().body(new DataResponse(HttpStatus.NOT_FOUND.value(), Message.failure,null, ex.getMessage()));
         }
+    }
+
+    @GetMapping
+    public ResponseEntity<?> getAll(){
+        return ResponseEntity.ok().body(new DataResponse(HttpStatus.CREATED.value(), Message.success,travelPriceTableRepository.findAll(), null));
     }
 }

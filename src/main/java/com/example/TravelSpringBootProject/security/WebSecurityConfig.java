@@ -1,8 +1,7 @@
 package com.example.TravelSpringBootProject.security;
 
 import com.example.TravelSpringBootProject.entity.User;
-import com.example.TravelSpringBootProject.exception.UserException;
-import com.example.TravelSpringBootProject.service.IUserService;
+import com.example.TravelSpringBootProject.service.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -20,14 +19,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-
-import java.util.Arrays;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
@@ -47,11 +38,11 @@ public class WebSecurityConfig {
             httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
             httpSecurity.authorizeHttpRequests(request->{
                 request.requestMatchers(
-//                                new AntPathRequestMatcher("/api/v1/travel/**"),
-//                                new AntPathRequestMatcher("/api/v1/category/**"),
-//                                new AntPathRequestMatcher("/api/v1/auth/**"),
-//                                new AntPathRequestMatcher("/api/v1/role/**"),
-//                                new AntPathRequestMatcher("/test/**")
+                                new AntPathRequestMatcher("/api/v1/travel",HttpMethod.GET.toString()),
+                                new AntPathRequestMatcher("/api/v1/category/**"),
+                                new AntPathRequestMatcher("/api/v1/auth/**"),
+                                new AntPathRequestMatcher("/api/v1/role/**"),
+                                new AntPathRequestMatcher("/test/**")
                         ).permitAll()
                         .anyRequest().permitAll();
             });

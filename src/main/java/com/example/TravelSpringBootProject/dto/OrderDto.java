@@ -11,10 +11,6 @@ public class OrderDto extends BaseDto{
 
     @NotNull
     private Long userId;
-
-    @NotNull
-    private Long orderId;
-
     @NotNull
     private Long travelId;
 
@@ -105,5 +101,22 @@ public class OrderDto extends BaseDto{
 
     public void setCustomerNote(String customerNote) {
         this.customerNote = customerNote;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+
+    public Long getTravelId() {
+        return travelId;
+    }
+
+    public void setTravelId(Long travelId) {
+        this.travelId = travelId;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.TravelSpringBootProject.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -19,7 +20,8 @@ public class Comment extends BaseEntity{
     @NotNull
     @ManyToOne
     @JoinColumn(name = "travel_id")
-    private TravelDetails travelDetails;
+    @JsonIgnore
+    private Travel travel;
 
     private Date commentDate;
     @NotNull
@@ -44,13 +46,6 @@ public class Comment extends BaseEntity{
         this.content = content;
     }
 
-    public TravelDetails getTravelDetails() {
-        return travelDetails;
-    }
-
-    public void setTravelDetails(TravelDetails travelDetails) {
-        this.travelDetails = travelDetails;
-    }
 
     public Date getCommentDate() {
         return commentDate;
@@ -66,5 +61,13 @@ public class Comment extends BaseEntity{
 
     public void setUserCommentName(String userCommentName) {
         this.userCommentName = userCommentName;
+    }
+
+    public Travel getTravel() {
+        return travel;
+    }
+
+    public void setTravel(Travel travel) {
+        this.travel = travel;
     }
 }

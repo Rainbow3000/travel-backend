@@ -6,7 +6,7 @@ import com.example.TravelSpringBootProject.dto.ScheduleDateDto;
 import com.example.TravelSpringBootProject.entity.ScheduleDate;
 import com.example.TravelSpringBootProject.exception.NotFoundException;
 import com.example.TravelSpringBootProject.response.DataResponse;
-import com.example.TravelSpringBootProject.service.IScheduleDateService;
+import com.example.TravelSpringBootProject.service.interfaces.IScheduleDateService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

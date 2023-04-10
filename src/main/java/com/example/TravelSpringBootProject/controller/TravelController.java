@@ -1,23 +1,21 @@
 package com.example.TravelSpringBootProject.controller;
 import com.example.TravelSpringBootProject.constants.Message;
 import com.example.TravelSpringBootProject.dto.TravelDto;
-import com.example.TravelSpringBootProject.entity.Category;
 import com.example.TravelSpringBootProject.entity.Travel;
-import com.example.TravelSpringBootProject.entity.TravelDetails;
 import com.example.TravelSpringBootProject.exception.NotFoundException;
 import com.example.TravelSpringBootProject.response.DataResponse;
-import com.example.TravelSpringBootProject.service.ICategoryService;
-import com.example.TravelSpringBootProject.service.ITravelService;
+import com.example.TravelSpringBootProject.service.interfaces.ICategoryService;
+import com.example.TravelSpringBootProject.service.interfaces.ITravelService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/v1/travel")
@@ -43,11 +41,7 @@ public class TravelController {
     public ResponseEntity<?> create(@RequestBody @Valid TravelDto travelDto){
             try{
                 Travel travelRequest = modelMapper.map(travelDto,Travel.class);
-                TravelDetails travelDetails = new TravelDetails();
-                travelDetails.setTravelDescription(travelDto.getTravelDescription());
-                travelDetails.setTravelDateNumber(travelDto.getTravelDateNumber());
-                travelDetails.setTravelAddress(travelDto.getTravelAddress());
-                Travel travel = iTravelService.save(travelRequest,travelDetails,travelDto.getCategoryId());
+                Travel travel = iTravelService.save(travelRequest,travelDto.getCategoryId());
                 TravelDto travelResponse = modelMapper.map(travel,TravelDto.class);
                 return ResponseEntity.ok().body(new DataResponse(HttpStatus.CREATED.value(),Message.success, travelResponse,null));
             }catch (NotFoundException ex){
@@ -67,14 +61,41 @@ public class TravelController {
         }
     }
 
-//    @GetMapping
-//    public ResponseEntity<?> getAllTravelByCategory(){
-//        try{
-//            return null;
-//        }catch (NotFoundException ex){
-//            return null;
-//        }
-//    }
+    @GetMapping("/getAllTravelByCategoryId/{id}")
+    public ResponseEntity<?> getAllTravelByCategoryId (@PathVariable Long id){
+        try{
+            Set<Travel> travelResponse = iTravelService.findAllByCategoryId(id);
+            return ResponseEntity.ok().body(new DataResponse(HttpStatus.OK.value(),Message.success,travelResponse,null));
 
+        }catch(NotFoundException ex){
+            return ResponseEntity.ok().body(new DataResponse(HttpStatus.NOT_FOUND.value(),Message.failure, null, ex.getMessage()));
 
+        }
+    }
+
+    @PutMapping("/{id}")
+
+    public ResponseEntity<?> update (@PathVariable Long id,TravelDto travelDto){
+        try{
+            Travel travelRequest = modelMapper.map(travelDto,Travel.class);
+            Boolean isUpdate = iTravelService.update(travelRequest,id);
+            return ResponseEntity.ok().body(new DataResponse(HttpStatus.OK.value(),Message.success,isUpdate,null));
+
+        }catch(NotFoundException ex){
+            return ResponseEntity.ok().body(new DataResponse(HttpStatus.NOT_FOUND.value(),Message.failure, null, ex.getMessage()));
+
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete (@PathVariable Long id){
+        try{
+            Boolean isDelete = iTravelService.delete(id);
+            return ResponseEntity.ok().body(new DataResponse(HttpStatus.OK.value(),Message.success,isDelete,null));
+
+        }catch(NotFoundException ex){
+            return ResponseEntity.ok().body(new DataResponse(HttpStatus.NOT_FOUND.value(),Message.failure, null, ex.getMessage()));
+
+        }
+    }
 }

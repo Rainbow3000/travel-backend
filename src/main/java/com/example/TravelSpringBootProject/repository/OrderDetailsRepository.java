@@ -1,4 +1,9 @@
 package com.example.TravelSpringBootProject.repository;
 
-public interface OrderDetailsRepository {
+import com.example.TravelSpringBootProject.entity.OrderDetails;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface OrderDetailsRepository extends JpaRepository<OrderDetails,Long> {
 }
