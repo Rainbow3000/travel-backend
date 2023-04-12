@@ -16,6 +16,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 @RestController
@@ -30,6 +31,7 @@ public class UserController {
     private ModelMapper modelMapper;
 
     @PutMapping("/{id}")
+    @RolesAllowed("[ROLE_ADMIN]")
     public ResponseEntity<?> update(@RequestBody @Valid UserDto userDto, @PathVariable  Long id){
         try{
 
@@ -45,6 +47,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
+    @RolesAllowed("[ROLE_ADMIN]")
     public ResponseEntity<?> delete (@PathVariable Long id){
         try{
             Boolean isDelete = iUserService.delete(id);

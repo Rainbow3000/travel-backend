@@ -34,7 +34,7 @@ public class CustomRestExceptionHandler  extends ResponseEntityExceptionHandler 
             errors.add(error.getObjectName() + ": " + error.getDefaultMessage());
         }
 
-        DataResponse dataResponse = new DataResponse(HttpStatus.BAD_REQUEST.value(), Message.failure, null,errors.toString());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(dataResponse);
+        DataResponse dataResponse = new DataResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), Message.failure, null,errors.toString());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR.value()).body(dataResponse);
     }
 }

@@ -18,7 +18,7 @@ public class TravelSchedule extends BaseEntity {
     @JoinColumn(name= "schedule_travel_id")
     private Travel travel;
 
-    @OneToMany(mappedBy = "travelSchedule")
+    @OneToMany(mappedBy = "travelSchedule",cascade = CascadeType.ALL)
     private Set<ScheduleDate> scheduleDate = new HashSet<>();
 
     public String getDateName() {

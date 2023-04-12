@@ -13,7 +13,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/travel/schedule/content")
@@ -25,12 +28,44 @@ public class ScheduleContentController{
     private IScheduleContentService scheduleContentService;
 
     @PostMapping
+    @RolesAllowed("[ROLE_ADMIN]")
     public ResponseEntity<?> save(@RequestBody @Valid ScheduleContentDto scheduleContentDto){
         try{
             ScheduleContent scheduleContentRequest = modelMapper.map(scheduleContentDto,ScheduleContent.class);
             ScheduleContent scheduleContent = scheduleContentService.save(scheduleContentRequest,scheduleContentDto.getScheduleDateId());
             ScheduleContentDto scheduleContentResponse = modelMapper.map(scheduleContent,ScheduleContentDto.class);
             return ResponseEntity.ok().body(new DataResponse(HttpStatus.CREATED.value(), Message.success,scheduleContentResponse, null));
+        }catch (NotFoundException ex){
+            return ResponseEntity.ok().body(new DataResponse(HttpStatus.NOT_FOUND.value(), Message.failure,null, ex.getMessage()));
+        }
+    }
+
+    @GetMapping
+    public ResponseEntity<?> findAll(){
+        try{
+
+            List<ScheduleContentDto> scheduleContentResponse = new ArrayList<>();
+
+           scheduleContentService.findAll().forEach(item->{
+               ScheduleContentDto scheduleContentDto = modelMapper.map(item,ScheduleContentDto.class);
+               scheduleContentResponse.add(scheduleContentDto);
+           });
+
+            return ResponseEntity.ok().body(new DataResponse(HttpStatus.CREATED.value(), Message.success,scheduleContentResponse, null));
+        }catch (NotFoundException ex){
+            return ResponseEntity.ok().body(new DataResponse(HttpStatus.NOT_FOUND.value(), Message.failure,null, ex.getMessage()));
+        }
+    }
+
+
+    @DeleteMapping("/{id}")
+    @RolesAllowed("[ROLE_ADMIN]")
+    public ResponseEntity<?> delete(@PathVariable Long id){
+        try{
+
+           Boolean isDelete = scheduleContentService.delete(id);
+
+            return ResponseEntity.ok().body(new DataResponse(HttpStatus.CREATED.value(), Message.success,isDelete, null));
         }catch (NotFoundException ex){
             return ResponseEntity.ok().body(new DataResponse(HttpStatus.NOT_FOUND.value(), Message.failure,null, ex.getMessage()));
         }

@@ -11,6 +11,7 @@ import com.example.TravelSpringBootProject.service.interfaces.ICommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Set;
 
 
@@ -34,6 +35,11 @@ public class CommentServiceImpl implements ICommentService {
         comment.setUserCommentName(user.getUsername().split("@")[0]);
 
         return commentRepository.save(comment);
+    }
+
+    @Override
+    public List<Comment> findAll() {
+        return commentRepository.findAll();
     }
 
     @Override

@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,7 @@ public class TravelController {
         return ResponseEntity.ok().body(new DataResponse(HttpStatus.OK.value(), Message.success, resultResponse,null));
     }
     @PostMapping
+    @RolesAllowed("[ROLE_ADMIN]")
     public ResponseEntity<?> create(@RequestBody @Valid TravelDto travelDto){
             try{
                 Travel travelRequest = modelMapper.map(travelDto,Travel.class);
@@ -51,15 +53,6 @@ public class TravelController {
 
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getSingleTravel(@PathVariable(name = "id") String id){
-        try{
-            System.out.println(id);
-            return null;
-        }catch (NotFoundException ex){
-            return null;
-        }
-    }
 
     @GetMapping("/getAllTravelByCategoryId/{id}")
     public ResponseEntity<?> getAllTravelByCategoryId (@PathVariable Long id){
@@ -74,7 +67,7 @@ public class TravelController {
     }
 
     @PutMapping("/{id}")
-
+    @RolesAllowed("[ROLE_ADMIN]")
     public ResponseEntity<?> update (@PathVariable Long id,TravelDto travelDto){
         try{
             Travel travelRequest = modelMapper.map(travelDto,Travel.class);
@@ -88,6 +81,7 @@ public class TravelController {
     }
 
     @DeleteMapping("/{id}")
+    @RolesAllowed("[ROLE_ADMIN]")
     public ResponseEntity<?> delete (@PathVariable Long id){
         try{
             Boolean isDelete = iTravelService.delete(id);
@@ -95,7 +89,6 @@ public class TravelController {
 
         }catch(NotFoundException ex){
             return ResponseEntity.ok().body(new DataResponse(HttpStatus.NOT_FOUND.value(),Message.failure, null, ex.getMessage()));
-
         }
     }
 }

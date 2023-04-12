@@ -9,6 +9,8 @@ import com.example.TravelSpringBootProject.service.interfaces.IScheduleContentSe
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class ScheduleContentServiceImpl implements IScheduleContentService {
     @Autowired
@@ -26,6 +28,11 @@ public class ScheduleContentServiceImpl implements IScheduleContentService {
         }
         scheduleContent.setScheduleDate(scheduleDate);
         return scheduleContentRepository.save(scheduleContent);
+    }
+
+    @Override
+    public List<ScheduleContent> findAll() {
+        return scheduleContentRepository.findAll();
     }
 
     @Override

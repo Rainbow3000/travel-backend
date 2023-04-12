@@ -28,7 +28,7 @@ public class User extends BaseEntity implements UserDetails {
     @NotNull
     private int status;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private Set<Order> orders = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

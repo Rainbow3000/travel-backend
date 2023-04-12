@@ -22,7 +22,7 @@ public class Category extends BaseEntity{
     private int categoryStatus;
     public Category(){}
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
     private Set<Travel> travel = new HashSet<>();
 
     public Set<Travel> getTravel() {

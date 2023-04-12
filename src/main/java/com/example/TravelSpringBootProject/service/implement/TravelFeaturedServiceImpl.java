@@ -9,6 +9,7 @@ import com.example.TravelSpringBootProject.service.interfaces.ITravelFeaturedSer
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Set;
 
 
@@ -49,4 +50,10 @@ public class TravelFeaturedServiceImpl implements ITravelFeaturedService {
         travelFeaturedRepository.delete(travelFeatured);
         return true;
     }
+
+    @Override
+    public List<TravelFeatured> findAll() {
+        return travelFeaturedRepository.findAll();
+    }
+
 }

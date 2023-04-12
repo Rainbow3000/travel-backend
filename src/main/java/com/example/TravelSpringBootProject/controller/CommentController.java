@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,7 @@ public class CommentController {
 
 
     @PostMapping
+    @RolesAllowed("[ROLE_ADMIN,ROLE_USER]")
     public ResponseEntity<?> save(@RequestBody @Valid CommentDto commentDto){
             try{
                 Comment commentRequest = modelMapper.map(commentDto,Comment.class);
@@ -40,6 +42,20 @@ public class CommentController {
                 return ResponseEntity.ok().body(new DataResponse(HttpStatus.NOT_FOUND.value(), Message.failure,null, ex.getMessage()));
 
             }
+    }
+
+    @GetMapping
+    public ResponseEntity<?> findAll(){
+        try{
+            List<CommentDto> commentResponse = new ArrayList<>();
+             iCommentService.findAll().stream().forEach(item->{
+                CommentDto commentDto = modelMapper.map(item,CommentDto.class);
+                commentResponse.add(commentDto);
+            });
+            return ResponseEntity.ok().body(new DataResponse(HttpStatus.OK.value(), Message.success,commentResponse,null));
+        }catch (NotFoundException ex){
+            return ResponseEntity.ok().body(new DataResponse(HttpStatus.NOT_FOUND.value(), Message.failure,null,ex.getMessage()));
+        }
     }
     @GetMapping("/travelId/{id}")
     public ResponseEntity<?> findByTravelId(@PathVariable Long id){
@@ -57,6 +73,7 @@ public class CommentController {
     }
 
     @PutMapping("/{id}")
+    @RolesAllowed("[ROLE_ADMIN]")
     public ResponseEntity<?> update(@PathVariable Long id,@RequestBody @Valid CommentDto commentDto){
         try{
             Comment commentRequest = modelMapper.map(commentDto,Comment.class);
@@ -68,6 +85,7 @@ public class CommentController {
     }
 
     @DeleteMapping("/{id}")
+    @RolesAllowed("[ROLE_ADMIN]")
     public ResponseEntity<?> delete(@PathVariable Long id){
         try{
             Boolean isDelete = iCommentService.delete(id);

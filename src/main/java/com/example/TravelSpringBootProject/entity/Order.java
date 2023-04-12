@@ -9,7 +9,7 @@ public class Order extends BaseEntity{
     @JoinColumn(name ="user_id")
     private User user;
 
-    @OneToOne(mappedBy = "order")
+    @OneToOne(mappedBy = "order",cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private OrderDetails orderDetails;
 

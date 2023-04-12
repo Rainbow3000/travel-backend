@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 @RestController
@@ -24,6 +25,7 @@ public class RoleController {
     @Autowired
     private ModelMapper modelMapper;
     @PostMapping
+    @RolesAllowed("[ROLE_ADMIN]")
     public ResponseEntity<?> create(@RequestBody @Valid RoleDto roleDto){
         try{
             Role roleRequest =  modelMapper.map(roleDto,Role.class);

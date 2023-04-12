@@ -19,15 +19,16 @@ public class TravelPriceTableServiceImpl implements ITravelPriceTableService {
     private TravelRepository travelRepository;
 
     @Override
-    public TravelPriceTable save(TravelPriceTable travelPriceTable,Long travelDetailsId) {
-        Travel travel = travelRepository.findById(travelDetailsId).orElseThrow(()-> new NotFoundException("Not found travel id"));
+    public TravelPriceTable save(TravelPriceTable travelPriceTable,Long travelId) {
+        Travel travel = travelRepository.findById(travelId).orElseThrow(()-> new NotFoundException("Not found travel id"));
         travelPriceTable.setTravel(travel);
         return travelPriceTableRepository.save(travelPriceTable);
     }
 
     @Override
     public Set<TravelPriceTable> findByTravelId(Long travelId) {
-        return null;
+        Travel travel = travelRepository.findById(travelId).orElseThrow(()-> new NotFoundException("Not found travel id"));
+        return travel.getTravelPriceTables();
     }
 
     @Override

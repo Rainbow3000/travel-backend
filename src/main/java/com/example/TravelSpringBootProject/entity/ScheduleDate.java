@@ -15,7 +15,7 @@ public class ScheduleDate extends BaseEntity{
     private TravelSchedule travelSchedule;
     private String sessionDateName;
 
-    @OneToMany(mappedBy = "scheduleDate")
+    @OneToMany(mappedBy = "scheduleDate",cascade = CascadeType.ALL)
     private Set<ScheduleContent> scheduleContent = new HashSet<>();
 
     public String getSessionDateName() {

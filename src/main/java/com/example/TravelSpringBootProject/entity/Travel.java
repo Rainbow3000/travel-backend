@@ -23,20 +23,24 @@ public class Travel extends BaseEntity implements Serializable {
     @NotNull
     private String travelDateNumber;
     @JsonIgnore
-    @OneToMany(mappedBy = "travel")
+    @OneToMany(mappedBy = "travel",cascade = CascadeType.ALL)
     private Set<TravelPriceTable> travelPriceTables = new HashSet<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "travel")
+    @OneToMany(mappedBy = "travel",cascade = CascadeType.ALL)
     private Set<TravelFeatured> travelFeatureds = new HashSet<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "travel")
+    @OneToMany(mappedBy = "travel",cascade = CascadeType.ALL)
     private Set<TravelSchedule> travelSchedules = new HashSet<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "travel")
+    @OneToMany(mappedBy = "travel",cascade = CascadeType.ALL)
     private Set<Comment> comments = new HashSet<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "travel",cascade = CascadeType.ALL)
+    private Set<ImageTravel> imageTravels = new HashSet<>();
 
     @Length(min = 5, max = 256)
     @NotNull
@@ -49,7 +53,7 @@ public class Travel extends BaseEntity implements Serializable {
     @NotNull
     private int travelStatus;
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 
@@ -113,6 +117,13 @@ public class Travel extends BaseEntity implements Serializable {
         this.travelDescription = travelDescription;
     }
 
+    public Set<ImageTravel> getImageTravels() {
+        return imageTravels;
+    }
+
+    public void setImageTravels(Set<ImageTravel> imageTravels) {
+        this.imageTravels = imageTravels;
+    }
 
     public String getTravelAddress() {
         return travelAddress;

@@ -45,7 +45,7 @@ public class AuthController {
             UserDto userResponse = modelMapper.map(user,UserDto.class);
             return ResponseEntity.ok().body(new DataResponse(HttpStatus.CREATED.value(), Message.success, userResponse,null));
         }catch (DuplicateException ex){
-            return ResponseEntity.ok().body(new DataResponse(HttpStatus.FORBIDDEN.value(), Message.failure, null,ex.getMessage()));
+            return ResponseEntity.ok().body(new DataResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), Message.failure, null,ex.getMessage()));
         }
     }
 

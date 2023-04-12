@@ -7,7 +7,6 @@ public class TravelFeaturedDto extends BaseDto {
     @NotNull
     private String featuredName;
     @NotNull
-    @NotEmpty
     private Long  travelId;
     public TravelFeaturedDto(){};
     public String getFeaturedName() {

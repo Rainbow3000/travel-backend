@@ -12,12 +12,12 @@ import java.util.Set;
 
 @Component
 public class UserDto extends BaseDto {
-    @Length(min = 10,max = 50)
+    @Length(min = 10,max = 50,message = "Email phải từ 10 kí tự trở lên !")
     @Email
     @NotNull
     private String email;
 
-    @Length(min = 8,max = 64)
+    @Length(min = 8,max = 64,message = "Mật khẩu phải từ 8 kí tự trở lên !")
     @NotNull
     private String password;
     @NotNull

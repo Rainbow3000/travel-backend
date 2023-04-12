@@ -34,17 +34,22 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-            httpSecurity.csrf().disable();
+            httpSecurity.headers().frameOptions().disable().and().cors().and().csrf().disable();
             httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
             httpSecurity.authorizeHttpRequests(request->{
                 request.requestMatchers(
-                                new AntPathRequestMatcher("/api/v1/travel",HttpMethod.GET.toString()),
-                                new AntPathRequestMatcher("/api/v1/category/**"),
-                                new AntPathRequestMatcher("/api/v1/auth/**"),
-                                new AntPathRequestMatcher("/api/v1/role/**"),
-                                new AntPathRequestMatcher("/test/**")
+                                new AntPathRequestMatcher("/api/v1/travel/**",HttpMethod.GET.toString()),
+                                new AntPathRequestMatcher("/api/v1/category/**",HttpMethod.GET.toString()),
+                                new AntPathRequestMatcher("/api/v1/travel/comment/**",HttpMethod.GET.toString()),
+                                new AntPathRequestMatcher("/api/v1/travel/schedule/**",HttpMethod.GET.toString()),
+                                new AntPathRequestMatcher("/api/v1/travel/price/**",HttpMethod.GET.toString()),
+                                new AntPathRequestMatcher("/api/v1/travel/schedule/date/**",HttpMethod.GET.toString()),
+                                new AntPathRequestMatcher("/api/v1/travel/schedule/content/**",HttpMethod.GET.toString()),
+                                new AntPathRequestMatcher("/api/v1/travel/featured/**",HttpMethod.GET.toString()),
+                                new AntPathRequestMatcher("/api/v1/travelDetails/image/**",HttpMethod.GET.toString()),
+                                new AntPathRequestMatcher("/api/v1/auth/**")
                         ).permitAll()
-                        .anyRequest().permitAll();
+                        .anyRequest().authenticated();
             });
 
             httpSecurity.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);

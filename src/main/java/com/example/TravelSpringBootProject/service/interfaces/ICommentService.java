@@ -11,6 +11,8 @@ import java.util.Set;
 @Service
 public interface ICommentService {
     Comment save(Comment comment,Long userId, Long travelId);
+
+    List<Comment> findAll();
     Set<Comment> findByTravelId(Long travelId);
     Boolean update(Comment comment,Long commentId);
     Boolean delete(Long commentId);

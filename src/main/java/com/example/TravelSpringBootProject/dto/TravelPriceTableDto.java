@@ -15,7 +15,7 @@ public class TravelPriceTableDto extends BaseDto {
     @NotEmpty
     private String place;
     @NotNull
-    private Long travelDetailsId;
+    private Long travelId;
 
     public TravelPriceTableDto() {
 
@@ -45,13 +45,6 @@ public class TravelPriceTableDto extends BaseDto {
         this.price = price;
     }
 
-    public Long getTravelDetailsId() {
-        return travelDetailsId;
-    }
-
-    public void setTravelDetailsId(Long travelDetailsId) {
-        this.travelDetailsId = travelDetailsId;
-    }
 
     public String getPlace() {
         return place;
@@ -59,5 +52,13 @@ public class TravelPriceTableDto extends BaseDto {
 
     public void setPlace(String place) {
         this.place = place;
+    }
+
+    public Long getTravelId() {
+        return travelId;
+    }
+
+    public void setTravelId(Long travelId) {
+        this.travelId = travelId;
     }
 }
