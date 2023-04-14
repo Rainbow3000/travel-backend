@@ -40,6 +40,10 @@ public class Travel extends BaseEntity implements Serializable {
 
     @JsonIgnore
     @OneToMany(mappedBy = "travel",cascade = CascadeType.ALL)
+    private Set<OrderDetails> orderDetails = new HashSet<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "travel",cascade = CascadeType.ALL)
     private Set<ImageTravel> imageTravels = new HashSet<>();
 
     @Length(min = 5, max = 256)
@@ -56,6 +60,8 @@ public class Travel extends BaseEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+
 
     public Travel() {}
 
@@ -173,5 +179,11 @@ public class Travel extends BaseEntity implements Serializable {
         this.comments = comments;
     }
 
+    public Set<OrderDetails> getOrderDetails() {
+        return orderDetails;
+    }
 
+    public void setOrderDetails(Set<OrderDetails> orderDetails) {
+        this.orderDetails = orderDetails;
+    }
 }

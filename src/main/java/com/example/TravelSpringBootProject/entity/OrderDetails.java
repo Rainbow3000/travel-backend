@@ -13,7 +13,7 @@ public class OrderDetails extends BaseEntity {
     @Column(name = "order_id")
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @MapsId
     @JoinColumn(name = "order_id")
     private Order order;
