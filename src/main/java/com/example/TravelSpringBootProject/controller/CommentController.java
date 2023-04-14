@@ -31,7 +31,7 @@ public class CommentController {
 
 
     @PostMapping
-    @RolesAllowed("[ROLE_ADMIN,ROLE_USER]")
+    @RolesAllowed({"ROLE_USER","ROLE_ADMIN"})
     public ResponseEntity<?> save(@RequestBody @Valid CommentDto commentDto){
             try{
                 Comment commentRequest = modelMapper.map(commentDto,Comment.class);
@@ -45,6 +45,7 @@ public class CommentController {
     }
 
     @GetMapping
+    @RolesAllowed("ROLE_ADMIN")
     public ResponseEntity<?> findAll(){
         try{
             List<CommentDto> commentResponse = new ArrayList<>();
@@ -73,7 +74,7 @@ public class CommentController {
     }
 
     @PutMapping("/{id}")
-    @RolesAllowed("[ROLE_ADMIN]")
+    @RolesAllowed("ROLE_ADMIN")
     public ResponseEntity<?> update(@PathVariable Long id,@RequestBody @Valid CommentDto commentDto){
         try{
             Comment commentRequest = modelMapper.map(commentDto,Comment.class);
@@ -85,7 +86,7 @@ public class CommentController {
     }
 
     @DeleteMapping("/{id}")
-    @RolesAllowed("[ROLE_ADMIN]")
+    @RolesAllowed("ROLE_ADMIN")
     public ResponseEntity<?> delete(@PathVariable Long id){
         try{
             Boolean isDelete = iCommentService.delete(id);

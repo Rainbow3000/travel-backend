@@ -28,7 +28,7 @@ public class ScheduleDateController {
     @Autowired
     private ModelMapper modelMapper;
     @PostMapping
-    @RolesAllowed("[ROLE_ADMIN]")
+    @RolesAllowed("ROLE_ADMIN")
     public ResponseEntity<?> save(@RequestBody @Valid ScheduleDateDto scheduleDateDto){
         try{
             ScheduleDate scheduleDateRequest = modelMapper.map(scheduleDateDto, ScheduleDate.class);

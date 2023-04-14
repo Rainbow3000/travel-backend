@@ -28,7 +28,7 @@ public class ScheduleContentController{
     private IScheduleContentService scheduleContentService;
 
     @PostMapping
-    @RolesAllowed("[ROLE_ADMIN]")
+    @RolesAllowed("ROLE_ADMIN")
     public ResponseEntity<?> save(@RequestBody @Valid ScheduleContentDto scheduleContentDto){
         try{
             ScheduleContent scheduleContentRequest = modelMapper.map(scheduleContentDto,ScheduleContent.class);
@@ -59,7 +59,7 @@ public class ScheduleContentController{
 
 
     @DeleteMapping("/{id}")
-    @RolesAllowed("[ROLE_ADMIN]")
+    @RolesAllowed("ROLE_ADMIN")
     public ResponseEntity<?> delete(@PathVariable Long id){
         try{
 

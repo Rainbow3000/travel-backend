@@ -29,7 +29,7 @@ public class TravelImageController {
     @Autowired
     private ModelMapper modelMapper;
     @PostMapping
-    @RolesAllowed("[ROLE_ADMIN]")
+    @RolesAllowed("ROLE_ADMIN")
     public ResponseEntity<?> save(@RequestBody @Valid ImageTravelDto imageTravelDto){
         try{
             ImageTravel imageTravelRequest =  modelMapper.map(imageTravelDto,ImageTravel.class);

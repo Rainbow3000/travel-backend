@@ -30,7 +30,7 @@ public class TravelFeaturedController {
 
 
     @PostMapping
-    @RolesAllowed("[ROLE_ADMIN]")
+    @RolesAllowed("ROLE_ADMIN")
     public ResponseEntity<?> createFeatured(@RequestBody @Valid TravelFeaturedDto travelFeaturedDto){
         try{
             TravelFeatured travelFeaturedRequest = modelMapper.map(travelFeaturedDto,TravelFeatured.class);
@@ -74,7 +74,7 @@ public class TravelFeaturedController {
     }
 
     @DeleteMapping("/{id}")
-    @RolesAllowed("[ROLE_ADMIN]")
+    @RolesAllowed("ROLE_ADMIN")
     public ResponseEntity<?> delete(@PathVariable Long id){
         try{
 

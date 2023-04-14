@@ -25,7 +25,7 @@ public class RoleController {
     @Autowired
     private ModelMapper modelMapper;
     @PostMapping
-    @RolesAllowed("[ROLE_ADMIN]")
+    @RolesAllowed("ROLE_ADMIN")
     public ResponseEntity<?> create(@RequestBody @Valid RoleDto roleDto){
         try{
             Role roleRequest =  modelMapper.map(roleDto,Role.class);

@@ -39,7 +39,7 @@ public class TravelController {
         return ResponseEntity.ok().body(new DataResponse(HttpStatus.OK.value(), Message.success, resultResponse,null));
     }
     @PostMapping
-    @RolesAllowed("[ROLE_ADMIN]")
+    @RolesAllowed("ROLE_ADMIN")
     public ResponseEntity<?> create(@RequestBody @Valid TravelDto travelDto){
             try{
                 Travel travelRequest = modelMapper.map(travelDto,Travel.class);
@@ -67,7 +67,7 @@ public class TravelController {
     }
 
     @PutMapping("/{id}")
-    @RolesAllowed("[ROLE_ADMIN]")
+    @RolesAllowed("ROLE_ADMIN")
     public ResponseEntity<?> update (@PathVariable Long id,TravelDto travelDto){
         try{
             Travel travelRequest = modelMapper.map(travelDto,Travel.class);
@@ -81,7 +81,7 @@ public class TravelController {
     }
 
     @DeleteMapping("/{id}")
-    @RolesAllowed("[ROLE_ADMIN]")
+    @RolesAllowed("ROLE_ADMIN")
     public ResponseEntity<?> delete (@PathVariable Long id){
         try{
             Boolean isDelete = iTravelService.delete(id);

@@ -28,7 +28,7 @@ public class TravelScheduleController {
     @Autowired
     private ITravelScheduleService iTravelScheduleService;
     @PostMapping
-    @RolesAllowed("[ROLE_ADMIN]")
+    @RolesAllowed("ROLE_ADMIN")
     public ResponseEntity<?> save(@RequestBody @Valid TravelScheduleDto travelScheduleDto){
         try{
             TravelSchedule travelScheduleRequest = modelMapper.map(travelScheduleDto,TravelSchedule.class);

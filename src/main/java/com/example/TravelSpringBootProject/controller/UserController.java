@@ -31,7 +31,7 @@ public class UserController {
     private ModelMapper modelMapper;
 
     @PutMapping("/{id}")
-    @RolesAllowed("[ROLE_ADMIN]")
+    @RolesAllowed("ROLE_ADMIN")
     public ResponseEntity<?> update(@RequestBody @Valid UserDto userDto, @PathVariable  Long id){
         try{
 
@@ -47,7 +47,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    @RolesAllowed("[ROLE_ADMIN]")
+    @RolesAllowed("ROLE_ADMIN")
     public ResponseEntity<?> delete (@PathVariable Long id){
         try{
             Boolean isDelete = iUserService.delete(id);

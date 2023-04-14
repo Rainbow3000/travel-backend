@@ -32,7 +32,7 @@ public class TravelPriceTableController {
     private TravelPriceTableRepository travelPriceTableRepository;
 
     @PostMapping
-    @RolesAllowed("[ROLE_ADMIN]")
+    @RolesAllowed("ROLE_ADMIN")
     public ResponseEntity<?> save(@RequestBody @Valid TravelPriceTableDto travelPriceTableDto){
         try{
             TravelPriceTable travelPriceTableRequest = modelMapper.map(travelPriceTableDto, TravelPriceTable.class);

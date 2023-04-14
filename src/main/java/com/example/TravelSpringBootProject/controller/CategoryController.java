@@ -43,7 +43,7 @@ public class CategoryController {
 
     }
     @PostMapping
-    @RolesAllowed("[ROLE_ADMIN]")
+    @RolesAllowed("ROLE_ADMIN")
     public ResponseEntity<?> create(@RequestBody @Valid CategoryDto categoryDto){
 
        Category categoryRequest = modelMapper.map(categoryDto,Category.class);
@@ -54,7 +54,7 @@ public class CategoryController {
 
 
     @PutMapping("/{id}")
-    @RolesAllowed("[ROLE_ADMIN]")
+    @RolesAllowed("ROLE_ADMIN")
     public ResponseEntity<?> update(@RequestBody CategoryDto categoryDto, @PathVariable Long id){
         try{
             Category categoryRequest = modelMapper.map(categoryDto,Category.class);
@@ -66,7 +66,7 @@ public class CategoryController {
     }
 
     @DeleteMapping("/{id}")
-    @RolesAllowed("[ROLE_ADMIN]")
+    @RolesAllowed("ROLE_ADMIN")
     public ResponseEntity<?> update(@PathVariable Long id){
         try{
             Boolean isDelete = iCategoryService.delete(id);
