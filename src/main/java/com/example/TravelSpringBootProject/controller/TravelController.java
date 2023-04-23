@@ -73,7 +73,6 @@ public class TravelController {
             Travel travelRequest = modelMapper.map(travelDto,Travel.class);
             Boolean isUpdate = iTravelService.update(travelRequest,id);
             return ResponseEntity.ok().body(new DataResponse(HttpStatus.OK.value(),Message.success,isUpdate,null));
-
         }catch(NotFoundException ex){
             return ResponseEntity.ok().body(new DataResponse(HttpStatus.NOT_FOUND.value(),Message.failure, null, ex.getMessage()));
 

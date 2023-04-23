@@ -12,9 +12,7 @@ public interface ICategoryService {
     Category save(Category category);
     Category findById(Long id);
     List<Category> findAll();
-
     Boolean update (Category category,Long categoryId);
-
     Boolean delete (Long categoryId);
 
 }
