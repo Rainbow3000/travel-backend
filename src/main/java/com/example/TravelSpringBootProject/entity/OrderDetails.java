@@ -22,10 +22,6 @@ public class OrderDetails extends BaseEntity {
     @JoinColumn(name = "travel_id")
     @JsonIgnore
     private Travel travel;
-    private String customerName;
-    private String customerEmail;
-    private String customerAddress;
-    private String customerPhone;
     private double totalPrice;
     private String peopelQuantity;
     private String status;
@@ -33,8 +29,6 @@ public class OrderDetails extends BaseEntity {
     private String customerNote;
 
     public OrderDetails() {}
-
-
 
     public String getPeopelQuantity() {
         return peopelQuantity;
@@ -44,13 +38,6 @@ public class OrderDetails extends BaseEntity {
         this.peopelQuantity = peopelQuantity;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
     public Long getId() {
         return id;
@@ -76,36 +63,13 @@ public class OrderDetails extends BaseEntity {
         this.travel = travel;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public String getStatus() {
+        return status;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
 
-    public String getCustomerEmail() {
-        return customerEmail;
-    }
-
-    public void setCustomerEmail(String customerEmail) {
-        this.customerEmail = customerEmail;
-    }
-
-    public String getCustomerAddress() {
-        return customerAddress;
-    }
-
-    public void setCustomerAddress(String customerAddress) {
-        this.customerAddress = customerAddress;
-    }
-
-    public String getCustomerPhone() {
-        return customerPhone;
-    }
-
-    public void setCustomerPhone(String customerPhone) {
-        this.customerPhone = customerPhone;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public double getTotalPrice() {

@@ -6,17 +6,31 @@ import com.example.TravelSpringBootProject.entity.Travel;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 public class OrderDto extends BaseDto{
 
     @NotNull
     private Long userId;
+
+    private Date createdDate;
+
     @NotNull
     private Long travelId;
 
     @NotNull
     @NotEmpty
     private String customerName;
+
+    @Override
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    @Override
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
 
     @NotNull
     private String customerEmail;
@@ -119,4 +133,6 @@ public class OrderDto extends BaseDto{
     public void setTravelId(Long travelId) {
         this.travelId = travelId;
     }
+
+
 }

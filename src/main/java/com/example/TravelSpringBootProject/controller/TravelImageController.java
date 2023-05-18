@@ -78,7 +78,7 @@ public class TravelImageController {
 
 
     @DeleteMapping("/{id}")
-    @RolesAllowed("[ROLE_ADMIN]")
+    @RolesAllowed("ROLE_ADMIN")
     public ResponseEntity<?> delete(@PathVariable Long id){
         try{
            Boolean isDelete = iimageTravel.delete(id);

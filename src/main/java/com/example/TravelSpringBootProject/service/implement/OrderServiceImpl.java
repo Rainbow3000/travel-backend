@@ -41,16 +41,24 @@ public class OrderServiceImpl implements IOrderService {
         if(travel == null){
             throw  new NotFoundException("Travel id " + travelId + "not found !");
         }
+        long millis=System.currentTimeMillis();
+        java.sql.Date date=new java.sql.Date(millis);
+
         order.setUser(user);
+
+        order.setCreatedDate(date);
+        order.setStatus("Đang chờ duyệt");
         orderDetails.setOrder(orderRepository.save(order));
+        orderDetails.setStatus("Đang chờ duyệt");
         orderDetails.setTravel(travel);
-        orderDetails.setStatus("Chờ duyệt");
+        orderDetails.setCreatedDate(date);
+
         orderDetailsRepository.save(orderDetails);
     }
 
     @Override
-    public List<OrderDetails> findAll() {
-        return orderDetailsRepository.findAll();
+    public List<Order> findAll() {
+        return orderRepository.findAll();
     }
 
     @Override
@@ -66,9 +74,12 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public Boolean update(Long orderId) {
-        OrderDetails order = orderDetailsRepository.findById(orderId).orElseThrow(()-> new NotFoundException("Not found"));
+        Order order = orderRepository.findById(orderId).orElseThrow(()-> new NotFoundException("Not found"));
+        OrderDetails orderDetails = orderDetailsRepository.findById(orderId).orElseThrow(()-> new NotFoundException("Not found"));
         order.setStatus("Đã duyệt");
-        orderDetailsRepository.save(order);
+        orderDetails.setStatus("Đã duyệt");
+        orderRepository.save(order);
+        orderDetailsRepository.save(orderDetails);
         return true ;
     }
 
@@ -78,5 +89,20 @@ public class OrderServiceImpl implements IOrderService {
         orderDetailsRepository.delete(order.getOrderDetails());
         orderRepository.delete(order);
         return true;
+    }
+
+    @Override
+    public Order findById(Long id) {
+        return orderRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public OrderDetails orderDetailsFindById(Long id) {
+        return orderDetailsRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<OrderDetails> findAllOrderDetails() {
+        return orderDetailsRepository.findAll();
     }
 }

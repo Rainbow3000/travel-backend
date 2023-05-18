@@ -68,7 +68,7 @@ public class TravelController {
 
     @PutMapping("/{id}")
     @RolesAllowed("ROLE_ADMIN")
-    public ResponseEntity<?> update (@PathVariable Long id,TravelDto travelDto){
+    public ResponseEntity<?> update (@PathVariable Long id,@RequestBody TravelDto travelDto){
         try{
             Travel travelRequest = modelMapper.map(travelDto,Travel.class);
             Boolean isUpdate = iTravelService.update(travelRequest,id);

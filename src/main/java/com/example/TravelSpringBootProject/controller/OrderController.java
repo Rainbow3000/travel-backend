@@ -36,14 +36,16 @@ public class OrderController {
             Order order = modelMapper.map(orderDto, Order.class);
             OrderDetails orderDetails = modelMapper.map(orderDto, OrderDetails.class);
             iOrderService.save(order,orderDetails,orderDto.getUserId(),orderDto.getTravelId());
+
             return ResponseEntity.ok().body(new DataResponse(HttpStatus.CREATED.value(), Message.success,"order success !", null));
+
         }catch (NotFoundException ex){
             return ResponseEntity.ok().body(new DataResponse(HttpStatus.NOT_FOUND.value(), Message.failure,null, ex.getMessage()));
         }
     }
 
-    @PutMapping("/{id}")
     @RolesAllowed("ROLE_ADMIN")
+    @GetMapping ("/update/{id}")
     public ResponseEntity<?> update(@PathVariable Long id){
         try{
             Boolean isUpdate =  iOrderService.update(id);
@@ -79,6 +81,57 @@ public class OrderController {
             return ResponseEntity.ok().body(new DataResponse(HttpStatus.NOT_FOUND.value(), Message.failure,null, ex.getMessage()));
         }
     }
+
+    @GetMapping("/{id}")
+    //@RolesAllowed("ROLE_ADMIN")
+    public ResponseEntity<?> findById(@PathVariable Long id){
+        try{
+
+            Order order = iOrderService.findById(id);
+            OrderDto orderDto = modelMapper.map(order,OrderDto.class);
+
+            return ResponseEntity.ok().body(new DataResponse(HttpStatus.CREATED.value(), Message.success,orderDto, null));
+        }catch (NotFoundException ex){
+            return ResponseEntity.ok().body(new DataResponse(HttpStatus.NOT_FOUND.value(), Message.failure,null, ex.getMessage()));
+        }
+    }
+
+
+    @GetMapping("/details/{id}")
+    //@RolesAllowed("ROLE_ADMIN")
+    public ResponseEntity<?> orderDetailsFindById(@PathVariable Long id){
+        try{
+
+            OrderDetails orderDetails = iOrderService.orderDetailsFindById(id);
+            OrderDto orderDto = modelMapper.map(orderDetails,OrderDto.class);
+
+            return ResponseEntity.ok().body(new DataResponse(HttpStatus.CREATED.value(), Message.success,orderDto, null));
+        }catch (NotFoundException ex){
+            return ResponseEntity.ok().body(new DataResponse(HttpStatus.NOT_FOUND.value(), Message.failure,null, ex.getMessage()));
+        }
+    }
+
+
+    @GetMapping("/details")
+    //@RolesAllowed("ROLE_ADMIN")
+    public ResponseEntity<?> findAllOrderDetail(){
+        try{
+
+            List<OrderDetails> orderDetails = iOrderService.findAllOrderDetails();
+            List<OrderDto> orderDtoList = new ArrayList<>();
+            orderDetails.forEach(item->{
+                OrderDto orderDto = modelMapper.map(item,OrderDto.class);
+                orderDtoList.add(orderDto);
+            });
+
+            return ResponseEntity.ok().body(new DataResponse(HttpStatus.CREATED.value(), Message.success,orderDtoList, null));
+        }catch (NotFoundException ex){
+            return ResponseEntity.ok().body(new DataResponse(HttpStatus.NOT_FOUND.value(), Message.failure,null, ex.getMessage()));
+        }
+    }
+
+
+
 
     @GetMapping("/userId/{id}")
     @RolesAllowed({"ROLE_USER","ROLE_ADMIN"})

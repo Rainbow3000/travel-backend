@@ -2,6 +2,7 @@ package com.example.TravelSpringBootProject.controller;
 
 import com.example.TravelSpringBootProject.constants.Message;
 import com.example.TravelSpringBootProject.dto.UserDto;
+import com.example.TravelSpringBootProject.dto.UserDtoResponse;
 import com.example.TravelSpringBootProject.entity.User;
 import com.example.TravelSpringBootProject.exception.DuplicateException;
 import com.example.TravelSpringBootProject.repository.UserRepository;
@@ -19,6 +20,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -67,6 +70,5 @@ public class AuthController {
             return ResponseEntity.ok().body(new DataResponse(HttpStatus.NOT_FOUND.value(), Message.failure,null,"Tài khoản hoặc mật khẩu không đúng"));
         }
     }
-
 
 }

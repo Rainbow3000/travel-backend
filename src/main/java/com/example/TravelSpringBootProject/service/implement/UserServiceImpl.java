@@ -13,6 +13,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class UserServiceImpl implements IUserService {
     @Autowired
@@ -33,9 +36,12 @@ public class UserServiceImpl implements IUserService {
             user.setPassword(password);
             return  userRepository.save(user);
         }
+        long millis=System.currentTimeMillis();
+        java.sql.Date date=new java.sql.Date(millis);
         user.setStatus(1);
         user.setPassword(password);
         user.addRole(roleUser);
+        user.setCreatedDate(date);
         return userRepository.save(user);
     }
 
@@ -74,8 +80,14 @@ public class UserServiceImpl implements IUserService {
     @Override
     public Boolean delete(Long userId) {
         User user = userRepository.findById(userId).orElseThrow(()-> new NotFoundException("Not found user id"));
-        userRepository.delete(user);
+        user.setStatus(2);
+        userRepository.save(user);
         return true;
+    }
+
+    @Override
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 
 
