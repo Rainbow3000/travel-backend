@@ -65,4 +65,18 @@ public class TravelPriceTableController {
     public ResponseEntity<?> getAll(){
         return ResponseEntity.ok().body(new DataResponse(HttpStatus.CREATED.value(), Message.success,travelPriceTableRepository.findAll(), null));
     }
+
+
+    @RolesAllowed("ROLE_ADMIN")
+    @DeleteMapping ("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id){
+        try{
+            Boolean isDelete = iTravelPriceTableService.delete(id);
+            return ResponseEntity.ok().body(new DataResponse(HttpStatus.CREATED.value(), Message.success,isDelete, null));
+        }catch (NotFoundException ex){
+            return ResponseEntity.ok().body(new DataResponse(HttpStatus.NOT_FOUND.value(), Message.failure,null, ex.getMessage()));
+        }
+    }
+
+
 }

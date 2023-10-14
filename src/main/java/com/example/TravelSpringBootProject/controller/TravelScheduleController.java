@@ -32,9 +32,7 @@ public class TravelScheduleController {
     public ResponseEntity<?> save(@RequestBody @Valid TravelScheduleDto travelScheduleDto){
         try{
             TravelSchedule travelScheduleRequest = modelMapper.map(travelScheduleDto,TravelSchedule.class);
-
             TravelSchedule travelSchedule = iTravelScheduleService.save(travelScheduleRequest,travelScheduleDto.getTravelId());
-
             TravelFeaturedDto travelScheduleResponse = modelMapper.map(travelSchedule,TravelFeaturedDto.class);
             return ResponseEntity.ok().body(new DataResponse(HttpStatus.CREATED.value(), Message.success,travelScheduleResponse, null));
         }catch (NotFoundException ex){
@@ -55,6 +53,20 @@ public class TravelScheduleController {
         return ResponseEntity.ok().body(new DataResponse(HttpStatus.CREATED.value(), Message.success,travelScheduleResponse, null));
 
     }
+
+
+    @RolesAllowed("ROLE_ADMIN")
+    @DeleteMapping ("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id){
+        try{
+            Boolean isDelete = iTravelScheduleService.delete(id);
+            return ResponseEntity.ok().body(new DataResponse(HttpStatus.CREATED.value(), Message.success,isDelete, null));
+        }catch (NotFoundException ex){
+            return ResponseEntity.ok().body(new DataResponse(HttpStatus.NOT_FOUND.value(), Message.failure,null, ex.getMessage()));
+        }
+    }
+
+
 
 
     @GetMapping("/travelId/{id}")

@@ -53,4 +53,15 @@ public class ScheduleDateController {
             return ResponseEntity.ok().body(new DataResponse(HttpStatus.NOT_FOUND.value(), Message.failure,null, ex.getMessage()));
         }
     }
+
+    @RolesAllowed("ROLE_ADMIN")
+    @DeleteMapping ("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id){
+        try{
+            Boolean isDelete = iScheduleDateService.delete(id);
+            return ResponseEntity.ok().body(new DataResponse(HttpStatus.CREATED.value(), Message.success,isDelete, null));
+        }catch (NotFoundException ex){
+            return ResponseEntity.ok().body(new DataResponse(HttpStatus.NOT_FOUND.value(), Message.failure,null, ex.getMessage()));
+        }
+    }
 }
